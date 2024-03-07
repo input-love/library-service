@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://postgres:5432/postgres?currentSchema=postgres}
+    username: ${DB_USER:postgres}
+    password: ${PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  data:
+    redis:
+      database: ${REDIS_DATABASE:0}
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:redis}
+      timeout: ${REDIS_TIMEOUT:3000}
+
+  jpa:
+    properties:
+      hibernate:
+        default_schema: ${DEFAULT_SCHEMA:postgres}
+        ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  liquibase:
+    default-schema: ${DEFAULT_SCHEMA:postgres}
+    liquibase-schema: ${LIQUIBASE_SCHEMA:postgres}
+    enabled: true
+
+  sql:
+    init:
+      mode: always

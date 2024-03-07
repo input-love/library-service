@@ -24,25 +24,35 @@ repositories {
 
 ext {
     preliquibaseVersion = '1.5.0'
+    liquibaseVersion = '4.26.0'
+    redisVersion = '3.2.3'
+
     lombokVersion = '1.18.30'
+
+    postgresqlVersion = '42.7.2'
+
     junitJupiterVersion = '1.19.6'
     testcontainersPostgresVersion = '1.19.6'
+    testcontainersRedisVersion = '1.6.4'
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.liquibase:liquibase-core'
     implementation "net.lbruun.springboot:preliquibase-spring-boot-starter:$preliquibaseVersion"
-    implementation "org.projectlombok:lombok:$lombokVersion"
+    implementation "org.liquibase:liquibase-core:$liquibaseVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis:$redisVersion"
 
-	runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+	runtimeOnly "org.postgresql:postgresql:$postgresqlVersion"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation "org.testcontainers:junit-jupiter:$junitJupiterVersion"
     testImplementation "org.testcontainers:postgresql:$testcontainersPostgresVersion"
+    testImplementation "com.redis.testcontainers:testcontainers-redis:$testcontainersRedisVersion"
 }
 
 tasks.named('test') {
