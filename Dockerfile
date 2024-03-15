@@ -19,4 +19,10 @@ WORKDIR /app
 
 COPY --from=build /workspace/build/libs/library-service-*.jar ./library-service.jar
 
+ENV JAVA_TOOL_OPTIONS="-Dcom.sun.management.jmxremote.port=1099 \
+-Dcom.sun.management.jmxremote.rmi.port=1099 \
+-Dcom.sun.management.jmxremote.ssl=false \
+-Dcom.sun.management.jmxremote.authenticate=false \
+-Djava.rmi.server.hostname=localhost"
+
 CMD ["java", "-jar", "library-service.jar"]

@@ -36,6 +36,10 @@ spring:
     init:
       mode: always
 
+  jmx:
+    default-domain: ${spring.application.name}
+    enabled: true
+
 management:
   endpoints:
     jmx:
