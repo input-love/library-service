@@ -1,0 +1,18 @@
+# Конфигурация сбора, содержащая ровно один конечный пункт для сбора:
+# Здесь это сам Prometheus.
+scrape_configs:
+  # Имя задания добавляется в виде метки `job=<job_name>` для всех временных рядов, собранных из этой конфигурации.
+  - job_name: 'library-service'
+
+    # Интервал сбора в секундах.
+    scrape_interval: 15s
+
+    # Таймаут во время сборки в секундах.
+    scrape_timeout: 10s
+
+    # Путь, по которому будет скачана информация для Prometheus.
+    metrics_path: '/actuator/prometheus'
+
+    # Адрес приложения на spring-boot, к которому будет обращаться Prometheus.
+    static_configs:
+      - targets: ['host.docker.internal:8080']

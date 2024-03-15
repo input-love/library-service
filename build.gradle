@@ -23,13 +23,16 @@ repositories {
 }
 
 ext {
-    preliquibaseVersion = '1.5.0'
-    liquibaseVersion = '4.26.0'
-    redisVersion = '3.2.3'
-
     lombokVersion = '1.18.30'
 
+    actuatorVersion = '3.2.3'
+    prometheusVersion = '1.12.4'
+
+    preliquibaseVersion = '1.5.0'
+    liquibaseVersion = '4.26.0'
+
     postgresqlVersion = '42.7.2'
+    redisVersion = '3.2.3'
 
     junitJupiterVersion = '1.19.6'
     testcontainersPostgresVersion = '1.19.6'
@@ -40,13 +43,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "net.lbruun.springboot:preliquibase-spring-boot-starter:$preliquibaseVersion"
-    implementation "org.liquibase:liquibase-core:$liquibaseVersion"
-    implementation "org.springframework.boot:spring-boot-starter-data-redis:$redisVersion"
 
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
-	runtimeOnly "org.postgresql:postgresql:$postgresqlVersion"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:$actuatorVersion"
+    implementation "io.micrometer:micrometer-registry-prometheus:$prometheusVersion"
+
+    implementation "net.lbruun.springboot:preliquibase-spring-boot-starter:$preliquibaseVersion"
+    implementation "org.liquibase:liquibase-core:$liquibaseVersion"
+
+    runtimeOnly "org.postgresql:postgresql:$postgresqlVersion"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis:$redisVersion"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'

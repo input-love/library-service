@@ -18,6 +18,25 @@ services:
     ports:
       - '6379:6379'
 
+  prometheus:
+    image: 'prom/prometheus'
+    container_name: prometheus
+    ports:
+      - '9090:9090'
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - './config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml'
+
+  grafana:
+    image: 'grafana/grafana'
+    container_name: grafana
+    environment:
+      - 'GF_SECURITY_ADMIN_USER=admin'
+      - 'GF_SECURITY_ADMIN_PASSWORD=admin'
+    ports:
+      - '3000:3000'
+
   library-service:
     build: .
     container_name: library-service
