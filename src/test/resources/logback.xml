@@ -1,0 +1,25 @@
+<configuration>
+
+<!-- Уровень логирования можно настроить на уровне корневого узла. Здесь установлен на DEBUG. -->
+<root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+</root>
+
+<!-- STDOUT аппендер для вывода логов в терминал -->
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+        <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+</appender>
+
+<!-- Конфигурация для логов Redis -->
+<logger name="redis.clients.jedis" level="DEBUG">
+    <appender-ref ref="STDOUT" />
+</logger>
+
+<!-- Конфигурация для логов PostgreSQL -->
+<logger name="org.postgresql" level="DEBUG">
+    <appender-ref ref="STDOUT" />
+</logger>
+
+</configuration>
